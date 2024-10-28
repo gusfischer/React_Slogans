@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Slogans</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f0f2f5;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .title {
+            font-size: 24px;
+            color: #1a1a1a;
+        }
+
+        .refresh-button {
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .refresh-button:hover {
+            background-color: #1d4ed8;
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            overflow: hidden;
+            transition: box-shadow 0.3s;
+        }
+
+        .card:hover {
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .card-header {
+            padding: 15px 20px;
+        }
+
+        .card-content {
+            padding: 20px;
+        }
+
+        .slogan-text {
+            font-size: 18px;
+            font-style: italic;
+            color: #4b5563;
+        }
+
+        .cars .card-header {
+            background-color: #dbeafe;
+        }
+
+        .cars .card-header h2 {
+            color: #2563eb;
+        }
+
+        .ecommerce .card-header {
+            background-color: #dcfce7;
+        }
+
+        .ecommerce .card-header h2 {
+            color: #16a34a;
+        }
+
+        .toys .card-header {
+            background-color: #fee2e2;
+        }
+
+        .toys .card-header h2 {
+            color: #dc2626;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .header {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="title">Gerador de Slogans</h1>
+            <button onclick="refreshSlogans()" class="refresh-button">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M23 4v6h-6M1 20v-6h6M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+                </svg>
+                Gerar Novos Slogans
+            </button>
+        </div>
+
+        <div class="card cars">
+            <div class="card-header">
+                <h2>Automóveis</h2>
+            </div>
+            <div class="card-content">
+                <p id="carSlogan" class="slogan-text"></p>
+            </div>
+        </div>
+
+        <div class="card ecommerce">
+            <div class="card-header">
+                <h2>E-commerce</h2>
+            </div>
+            <div class="card-content">
+                <p id="ecommerceSlogan" class="slogan-text"></p>
+            </div>
+        </div>
+
+        <div class="card toys">
+            <div class="card-header">
+                <h2>Brinquedos</h2>
+            </div>
+            <div class="card-content">
+                <p id="toySlogan" class="slogan-text"></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const carSlogans = [
+            "A tecnologia que move seus sonhos",
+            "Feito para quem exige o melhor",
+            "O prazer de dirigir",
+            "Revolução sobre rodas",
+            "Supere seus limites",
+            "Design do futuro, performance do presente",
+            "Perfeição em cada detalhe",
+            "Sua vida merece mais potência",
+            "Inovação que você pode dirigir",
+            "Tecnologia que impressiona, conforto que conquista",
+            "A evolução da mobilidade",
+            "Directed by excellence",
+            "Poder e elegância em perfeita harmonia",
+            "Além das suas expectativas",
+            "O carro que entende você"
+        ];
+
+        const ecommerceSlogans = [
+            "Da tela para sua casa em um clique",
+            "Seu desejo é nosso comando",
+            "Experiência única em cada compra",
+            "Conectando pessoas e produtos",
+            "Seu shopping center virtual",
+            "Compre mais, preocupe-se menos",
+            "A loja que nunca fecha",
+            "O mundo em suas mãos",
+            "Facilitando sua vida digital",
+            "Compromisso com sua satisfação",
+            "Economia e conveniência em cada clique",
+            "Seu marketplace de confiança",
+            "Entregando sonhos em sua porta",
+            "Mais que uma loja, uma experiência",
+            "Seu tempo é precioso, nós entendemos"
+        ];
+
+        const toySlogans = [
+            "Onde sonhos ganham vida",
+            "Brincadeira é coisa séria",
+            "Inventando sorrisos desde sempre",
+            "Diversão sem idade",
+            "Inspire-se, brinque, cresça",
+            "Transformando momentos em memórias",
+            "A magia começa com um brinquedo",
+            "Cultivando imaginações brilhantes",
+            "Aprender brincando é melhor",
+            "Criatividade em forma de diversão",
+            "Construindo futuros através do brincar",
+            "Onde a imaginação não tem limites",
+            "Brinquedos que inspiram gerações",
+            "Alegria em cada descoberta",
+            "Criando histórias inesquecíveis"
+        ];
+
+        function getRandomSlogan(array) {
+            return array[Math.floor(Math.random() * array.length)];
+        }
+
+        function refreshSlogans() {
+            document.getElementById('carSlogan').textContent = getRandomSlogan(carSlogans);
+            document.getElementById('ecommerceSlogan').textContent = getRandomSlogan(ecommerceSlogans);
+            document.getElementById('toySlogan').textContent = getRandomSlogan(toySlogans);
+        }
+
+        // Gerar slogans iniciais quando a página carregar
+        refreshSlogans();
+    </script>
+</body>
+</html>
